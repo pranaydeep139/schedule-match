@@ -1,0 +1,25 @@
+# --- Secrets ---
+# NEVER commit your environment variables file.
+# This is the most important line in this file.
+backend/.env
+
+# --- Python ---
+# Ignore the virtual environment folder. This is user-specific and large.
+backend/venv/
+
+# Ignore Python bytecode files and cache folders.
+__pycache__/
+*.pyc
+
+# --- Operating System Files ---
+# Ignore macOS specific files
+.DS_Store
+
+# Ignore Windows specific files
+Thumbs.db
+desktop.ini
+
+# --- IDE / Editor Configuration ---
+# Ignore configuration folders for popular editors like VSCode and JetBrains.
+.vscode/
+.idea/
