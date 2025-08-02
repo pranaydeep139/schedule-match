@@ -1,4 +1,4 @@
-const API_URL = "http://127.0.0.1:8000"; // Backend URL
+const API_URL = "https://schedule-match-production.up.railway.app/"; // Backend URL
 // --- Global State ---
 let currentUser = null;
 let currentWeekStart = null;
