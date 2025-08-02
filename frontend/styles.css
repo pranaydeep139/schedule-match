@@ -1,0 +1,705 @@
+/* --- THEME COLORS --- */
+:root {
+    --primary-color: #FF6B6B;      /* Pinkish Red */
+    --primary-hover-color: #e05252;
+    --background-color: #FFFBEB;   /* Light Yellow */
+    --card-background-color: #FFFFFF;
+    --text-color: #4F4F4F;
+    --border-color: #E0E0E0;
+    --danger-color: #c0392b;
+    --danger-hover-color: #a5281a;
+    --success-color: #27ae60;
+    --success-hover-color: #1f8a4c;
+    --unavailable-bg-color: #f2f2f2;
+    --has-schedule-bg-color: #FFE6E6; /* Light pink for scheduled days */
+}
+
+/* Base Styles */
+* { box-sizing: border-box; }
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin: 0; padding: 0; min-height: 100vh;
+}
+
+/* --- BUTTONS & FORMS (Themed) --- */
+button {
+    margin-top: 1.5rem; padding: 0.75rem; border: none; border-radius: 4px;
+    background-color: var(--primary-color);
+    color: white; font-size: 1rem; cursor: pointer;
+    transition: background-color 0.2s;
+}
+button:hover { background-color: var(--primary-hover-color); }
+.nav-btn { background-color: var(--primary-color); }
+.nav-btn:hover { background-color: var(--primary-hover-color); }
+.save-btn { background-color: var(--success-color); }
+.save-btn:hover { background-color: var(--success-hover-color); }
+.clear-btn { background-color: #6c757d; }
+.clear-btn:hover { background-color: #545b62; }
+#logout-button, .remove-slot { background-color: var(--danger-color); }
+#logout-button:hover, .remove-slot:hover { background-color: var(--danger-hover-color); }
+
+/* --- HEADER & USER SEARCH --- */
+.header {
+    background-color: var(--card-background-color);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem; padding: 1rem 1.5rem; position: relative;
+}
+.header h1 { margin: 0; font-size: 1.5rem; }
+.header-actions { display: flex; align-items: center; gap: 1rem; }
+.search-container { position: relative; }
+#user-search {
+    padding: 0.5rem; border: 1px solid var(--border-color); border-radius: 4px;
+    width: 200px; transition: width 0.3s;
+}
+#user-search:focus { width: 250px; }
+#search-results {
+    display: none; position: absolute; top: 100%; left: 0; width: 100%;
+    background: var(--card-background-color); border: 1px solid var(--border-color);
+    border-radius: 0 0 8px 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); z-index: 1001;
+}
+.search-result-item {
+    padding: 0.75rem; display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid #f0f0f0;
+}
+.search-result-item:last-child { border-bottom: none; }
+.search-result-item .user-info { display: flex; flex-direction: column; }
+.search-result-item .display-name { font-weight: 600; }
+.search-result-item .username { font-size: 0.8rem; color: #777; }
+.search-result-item button {
+    padding: 0.25rem 0.5rem; font-size: 0.8rem; margin: 0;
+}
+.search-result-item button:disabled { background-color: #ccc; cursor: not-allowed; }
+
+/* Friends Button */
+.friends-btn {
+    background-color: var(--primary-color); color: white; border: none;
+    border-radius: 4px; padding: 0.5rem 1rem; cursor: pointer;
+    font-weight: 500;
+}
+.friends-btn:hover { background-color: var(--primary-hover-color); }
+
+
+/* --- CALENDAR (Themed) --- */
+.day-card.today { border-color: var(--primary-color); }
+.day-card.has-schedule { background-color: var(--has-schedule-bg-color); }
+.day-card.unavailable { background-color: var(--unavailable-bg-color); opacity: 0.6; }
+.time-summary { color: var(--primary-color); }
+
+/* --- MODAL (Themed) --- */
+.tab-btn.active { color: var(--primary-color); border-bottom-color: var(--primary-color); }
+.tab-btn:hover { color: var(--primary-color); }
+.time-slot { border-left: 4px solid var(--primary-color); }
+.time-slot.busy-time { border-left-color: var(--danger-color); background-color: #fdeeee; }
+.toggle-container input:checked + .toggle-slider { background-color: var(--primary-color); }
+.quick-buttons button:hover { background-color: var(--has-schedule-bg-color); border-color: var(--primary-color); }
+
+/* --- NEW: Friends Modal --- */
+.friends-modal-content {
+    background-color: #fff; margin: 5% auto; border-radius: 8px;
+    width: 90%; max-width: 450px;
+    max-height: 90vh; overflow-y: auto;
+    animation: slideIn 0.3s ease;
+}
+.friend-list, .request-list {
+    list-style: none; padding: 0; margin: 0;
+}
+.friend-item, .request-item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem; border-bottom: 1px solid var(--border-color);
+}
+.friend-item:last-child, .request-item:last-child { border-bottom: none; }
+.friend-item .user-info, .request-item .user-info {
+    display: flex; flex-direction: column;
+}
+.friend-item .display-name, .request-item .display-name { font-weight: 600; }
+.friend-item .username, .request-item .username { font-size: 0.8rem; color: #777; }
+.friend-item-actions button, .request-item-actions button {
+    margin: 0 0 0 0.5rem; padding: 0.25rem 0.5rem; font-size: 0.8rem;
+}
+.request-item-actions .accept-btn { background-color: var(--success-color); }
+.request-item-actions .accept-btn:hover { background-color: var(--success-hover-color); }
+.request-item-actions .decline-btn { background-color: var(--danger-color); }
+.request-item-actions .decline-btn:hover { background-color: var(--danger-hover-color); }
+
+/* Existing styles below, no changes needed for most */
+/* ... (copy the rest of your existing styles.css here) ... */
+/* Base Styles */
+* {
+    box-sizing: border-box;
+}
+
+/* Loading Screen */
+.loading-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: var(--background-color);
+}
+
+.spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid var(--primary-color);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Login/Register Container (existing) */
+.container {
+    background-color: #fff;
+    padding: 2rem 3rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    margin-top: 10vh;
+}
+
+/* App Container */
+.app-container {
+    max-width: 100%;
+    min-height: 100vh;
+    background-color: var(--background-color);
+}
+
+.timezone-select {
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: #fff;
+    font-size: 0.9rem;
+}
+
+/* Calendar Navigation */
+.calendar-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background-color: #fff;
+    margin: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.nav-btn {
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.week-display {
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+/* Calendar Grid */
+.calendar-container {
+    padding: 0 1rem 1rem;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    max-width: 100%;
+}
+
+.day-card {
+    background-color: var(--card-background-color);
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 2px solid transparent;
+    min-height: 120px;
+}
+
+.day-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.day-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.day-name {
+    font-weight: 600;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.day-date {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.day-status {
+    font-size: 0.8rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    animation: fadeIn 0.2s ease;
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h3 {
+    margin: 0;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: #999;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-btn:hover {
+    color: var(--text-color);
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+/* Availability Toggle */
+.availability-section {
+    margin-bottom: 2rem;
+}
+
+.toggle-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+}
+
+.toggle-container input[type="checkbox"] {
+    display: none;
+}
+
+.toggle-slider {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 26px;
+    background-color: #ccc;
+    border-radius: 26px;
+    transition: 0.3s;
+}
+
+.toggle-slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.toggle-label {
+    font-weight: 500;
+}
+
+/* Mode Tabs */
+.mode-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    font-weight: 500;
+    color: #666;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+
+/* Time Slots */
+.time-slots-container {
+    min-height: 100px;
+    margin-bottom: 1.5rem;
+}
+
+.time-slot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    background-color: #f8f9fa;
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+}
+
+.time-slot-text {
+    font-weight: 500;
+}
+
+.empty-state {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    padding: 2rem;
+}
+
+/* Add Time Section */
+.add-time-section {
+    margin-bottom: 1.5rem;
+}
+
+.time-inputs {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.time-inputs select {
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 1rem;
+    background-color: #fff;
+    cursor: pointer;
+    flex-grow: 1; /* Helps with alignment on mobile */
+}
+
+/* Style for the options inside the dropdown */
+.am-option {
+    background-color: #f8f9fa; /* Light Gray for AM */
+    color: #212529;
+}
+
+.pm-option {
+    background-color: #e9ecef; /* Slightly Darker Gray for PM */
+    color: #212529;
+}
+
+.time-inputs input[type="time"] {
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.time-inputs span {
+    color: #666;
+    font-weight: 500;
+}
+
+/* Quick Times */
+.quick-times {
+    margin-bottom: 1.5rem;
+}
+
+.quick-times h4 {
+    margin: 0 0 0.75rem 0;
+    font-size: 0.9rem;
+}
+
+.quick-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 0.5rem;
+}
+
+.quick-buttons button {
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    background-color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.2s ease;
+}
+
+/* Modal Footer */
+.modal-footer {
+    padding: 1.5rem;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+}
+
+/* Form Elements (existing) */
+h1, h2 {
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    color: #555;
+}
+
+input {
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.form-divider {
+    text-align: center;
+    margin: 2rem 0;
+    border-bottom: 1px solid var(--border-color);
+    line-height: 0.1em;
+}
+
+.form-divider span {
+    background: #fff;
+    padding: 0 10px;
+    color: #888;
+}
+
+#message {
+    text-align: center;
+    margin-top: 1rem;
+    color: red;
+}
+
+/* --- Styles for New Schedule Modal UI --- */
+.schedule-list-section {
+    margin-bottom: 2rem;
+}
+.schedule-list-section h4 {
+    margin: 0 0 0.75rem 0;
+    color: var(--text-color);
+    font-weight: 600;
+}
+.add-new-slot-btn {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 1px dashed var(--primary-color);
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    margin-top: 0.5rem;
+    width: 100%;
+}
+.add-new-slot-btn:hover {
+    background-color: var(--has-schedule-bg-color);
+}
+
+/* Form that appears dynamically */
+.add-time-form {
+    background-color: #f8f9fa;
+    border-radius: 6px;
+    padding: 1rem;
+    margin-top: 0.5rem;
+    border: 1px solid var(--border-color);
+}
+.add-time-form-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+.add-time-form-actions button {
+    margin-top: 0;
+    flex-grow: 1;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.add-new-slot-btn {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 1px dashed var(--primary-color);
+    padding: 0.75rem 1rem;
+    font-weight: 500;
+    margin-top: 0.5rem;
+    width: 100%;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.add-new-slot-btn:hover {
+    background-color: var(--has-schedule-bg-color);
+    border-style: solid;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header { flex-direction: column; align-items: stretch; gap: 0.5rem; }
+    .header-actions { justify-content: space-between; }
+    .calendar-grid { grid-template-columns: 1fr; }
+    .modal-content, .friends-modal-content { width: 95%; margin: 2% auto; max-height: 95vh; }
+    .time-inputs { flex-direction: column; align-items: stretch; }
+    .modal-footer { flex-direction: column; }
+    .calendar-nav { margin: 0.5rem; padding: 0.75rem; }
+}
+
+@media (max-width: 480px) {
+    .header { padding: 1rem; }
+    .calendar-nav { margin: 0.25rem; padding: 0.5rem; }
+    .week-display { font-size: 1rem; }
+    .day-card { min-height: 100px; }
+    .quick-buttons { grid-template-columns: 1fr 1fr; }
+}
+
+/* --- NEW: Schedule Match Styles --- */
+.match-item, .match-request-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+.match-item:last-child, .match-request-item:last-child {
+    border-bottom: none;
+}
+.match-item-actions button, .match-request-item-actions button {
+    margin: 0 0 0 0.5rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+}
+
+#match-requests-count {
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+/* --- NEW: Overlap Modal Styles --- */
+#match-modal-body {
+    padding: 1rem 1.5rem;
+}
+
+.overlap-date-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+.overlap-date-nav .nav-btn {
+    width: 35px;
+    height: 35px;
+    margin: 0;
+}
+.overlap-date-display {
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.overlap-section {
+    margin-bottom: 1.5rem;
+}
+.overlap-section h4 {
+    margin: 0 0 0.75rem 0;
+    color: #333;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 0.5rem;
+    display: inline-block;
+}
+
+.overlap-slot-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+}
+.overlap-slot {
+    padding: 0.75rem;
+    border-radius: 6px;
+    font-weight: 500;
+    text-align: center;
+}
+.overlap-slot.common {
+    background-color: var(--success-color);
+    color: white;
+}
+.overlap-slot.friend {
+    background-color: #e9ecef;
+    color: #495057;
+}
+.overlap-slot.own {
+    background-color: var(--has-schedule-bg-color);
+    color: var(--text-color);
+}

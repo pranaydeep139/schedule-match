@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duckhog Schedule Match 🐧</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading" class="loading-screen">
+        <div class="spinner"></div>
+        <p>Loading your schedule...</p>
+    </div>
+
+    <!-- Main App Container -->
+    <div id="app" class="app-container" style="display: none;">
+        <header class="header">
+            <h1>Duckhog Schedule Match 🐧</h1>
+            <div class="header-actions">
+                <div class="search-container">
+                    <input type="search" id="user-search" placeholder="Find users...">
+                    <div id="search-results"></div>
+                </div>
+                <button id="friends-btn" class="friends-btn" onclick="openFriendsModal()">Friends</button>
+                <select id="timezone-select" class="timezone-select">
+                    <!-- <option value="UTC">UTC</option>
+                    <option value="America/New_York">Eastern Time</option>
+                    <option value="America/Chicago">Central Time</option>
+                    <option value="America/Denver">Mountain Time</option>
+                    <option value="America/Los_Angeles">Pacific Time</option>
+                    <option value="Europe/London">London</option>
+                    <option value="Europe/Paris">Paris</option>
+                    <option value="Europe/Berlin">Berlin</option>
+                    <option value="Asia/Tokyo">Tokyo</option>
+                    <option value="Asia/Shanghai">Shanghai</option>
+                    <option value="Asia/Kolkata">India Standard Time</option>
+                    <option value="Australia/Sydney">Sydney</option> -->
+                </select>
+                <button id="logout-button" onclick="logout()">Logout</button>
+            </div>
+        </header>
+
+        <!-- Calendar Navigation -->
+        <div class="calendar-nav">
+            <button id="prev-week" class="nav-btn">&lt;</button>
+            <span id="week-display" class="week-display"></span>
+            <button id="next-week" class="nav-btn">&gt;</button>
+        </div>
+
+        <!-- Calendar Grid -->
+        <div class="calendar-container">
+            <div id="calendar-grid" class="calendar-grid">
+                <!-- Days will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Day Detail Modal -->
+        <div id="day-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modal-date-title">Schedule for Date</h3>
+                    <button class="close-btn" onclick="closeDayModal()">×</button>
+                </div>
+                
+                <div class="modal-body">
+                    <!-- Availability Toggle -->
+                    <div class="availability-section">
+                        <label class="toggle-container">
+                            <input type="checkbox" id="is-available" onchange="toggleDayAvailability()">
+                            <span class="toggle-slider"></span>
+                            <span class="toggle-label">Available this day</span>
+                        </label>
+                    </div>
+
+                    <!-- Free Times Section -->
+                    <div class="schedule-list-section">
+                        <h4>Free Times</h4>
+                        <div id="free-slots-list" class="time-slots-container">
+                            <!-- Free slots will be populated here -->
+                        </div>
+                        <div id="add-free-time-container">
+                             <button class="add-new-slot-btn" onclick="showAddTimeForm('free')">+ Add Free Time</button>
+                        </div>
+                    </div>
+
+                    <!-- Busy Times Section -->
+                    <div class="schedule-list-section">
+                        <h4>Busy Times</h4>
+                        <div id="busy-slots-list" class="time-slots-container">
+                            <!-- Busy slots will be populated here -->
+                        </div>
+                        <div id="add-busy-time-container">
+                             <!-- FIX: Changed 'class.' to 'class=' -->
+                             <button class="add-new-slot-btn" onclick="showAddTimeForm('busy')">+ Add Busy Time</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hidden template for the 'add time' form -->
+        <div id="add-time-form-template" style="display: none;">
+            <div class="add-time-form">
+                <div class="time-inputs">
+                    <select class="start-time-select"></select>
+                    <span>to</span>
+                    <select class="end-time-select"></select>
+                </div>
+                <div class="add-time-form-actions">
+                    <button class="save-btn save-slot-btn">Save Slot</button>
+                    <button class="clear-btn cancel-slot-btn">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- NEW: Friends Modal -->
+    <div id="friends-modal" class="modal">
+        <div class="friends-modal-content">
+            <div class="modal-header">
+                <h3>Friends & Matches</h3>
+                <button class="close-btn" onclick="closeFriendsModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="mode-tabs">
+                    <button id="matches-tab" class="tab-btn active" onclick="switchFriendsMode('matches')">
+                        Matches <span id="match-requests-count"></span>
+                    </button>
+                    <button id="my-friends-tab" class="tab-btn" onclick="switchFriendsMode('friends')">
+                        Friends
+                    </button>
+                    <button id="requests-tab" class="tab-btn" onclick="switchFriendsMode('requests')">
+                        Friend Requests <span id="requests-count"></span>
+                    </button>
+                </div>
+                <div id="friends-content">
+                    <!-- Content populated by JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- NEW: Match Overlap Modal -->
+    <div id="match-overlap-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="match-modal-title">Schedule Overlap</h3>
+                <button class="close-btn" onclick="closeMatchOverlapModal()">×</button>
+            </div>
+            <div class="modal-body" id="match-modal-body">
+                <!-- Overlap details populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
